@@ -1,1 +1,1 @@
-console.log('I love hate git');
+console.log('I hate git');

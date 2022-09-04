@@ -21,11 +21,12 @@ var header= document.getElementById('main-header');
 //console.log(headerTitle.textContent);
 //headerTitle.innerHTML = '<h3>Helloo</h3>';
 //headerTitle.style.borderBottom = 'Solid 3px #000';
-var items = document.getElementsByClassName('list-group-item');
+var li = document.getElementsByTagName('li');
 //items[1].textContent = 'Hello';
 //items[1].style.fontWeight = 'bold';
-items[3].style.backgroundColor = 'lightgreen';
+//li[3].style.backgroundColor = 'lightgreen';
 
-for(var i=0;i<items.length;i++){
-  items[i].style.fontWeight = 'bold';
+for(var i=0;i<li.length;i++){
+  li[i].style.fontWeight = 'bold';
+  
 }

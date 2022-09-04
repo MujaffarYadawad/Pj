@@ -36,24 +36,87 @@
 //header.style.borderBottom = 'solid 4px #green';
 
 //var input = document.querySelector('input');
-i//nput.value = 'Hello World';
+//input.value = 'Hello World';
   
 //var submit = document.querySelector('input[type="submit"]');
 //submit.value="send";
 //var item = document.querySelector('.list-group-item');
 //item.style.color = 'lightgreen';
-var secondItem = document.querySelector('.list-group-item:nth-child(2)');
+//var secondItem = document.querySelector('.list-group-item:nth-child(2)');
 //secondItem.style.color = 'ligthgreen'; 
 
 //querySelectorAll
-var titles =document.querySelectorAll('.title');
-console.log(titles);
-titles[0].textContent = 'Hello';;
+//var titles =document.querySelectorAll('.title');
+//console.log(titles);
+//titles[0].textContent = 'Hello';;
  
-var odd = document.querySelectorAll('li:nth-child(odd)');
-for(var i=0;i<odd.length;i++){
-  odd[i].style.backgroundColor = 'lightgreen';
-}
+//var odd = document.querySelectorAll('li:nth-child(odd)');
+//for(var i=0;i<odd.length;i++){
+  //odd[i].style.backgroundColor = 'lightgreen';
+//}
 
+//Traversing The Dom
 
+//parentElement
 
+//var itemElement = document.querySelector('#items');
+// //parent
+// console.log(itemElement.parentNode);
+// itemElement.parentNode.style.backgroundColor = '#f4f4f4';
+// console.log(itemElement.parentNode.parentNode.parentNode);
+
+//child node/
+ //var itemList = document.querySelector('#items');
+// console.log(itemList.childNodes);
+// console.log(itemList.children);
+// console.log(itemList.children[1]);
+// itemList.children[1].style.backgroundColor = 'yellow';
+
+//Firstchile
+
+// console.log(itemList.firstChild);
+//firstelementchild
+
+// console.log(itemList.firstElementChild);
+
+// itemList.firstElementChild.textContent = 'Hello';
+//laastElemnertchild
+// console.log(itemList.lastElementChild);
+
+// itemList.lastElementChild.textContent = 'Hello4';
+ 
+//nextElemnt
+
+// console.log(itemList.nextSibling);
+// //lnextsibling
+
+// console.log(itemList.nextElementSibling);
+
+//preveous sibling
+//console.log(itemList.previousSibling);
+//previousElementSibling
+//temList.previousElementSibling.style.color = 'green'; 
+
+//createElement
+ //creat div
+ var newDiv = document.createElement('div');
+ newDiv.className='Hello';
+//add id
+newDiv.id = 'Hello1';
+//add attr
+newDiv.setAttribute('title','Hello div')
+//console.log(newDiv);
+//acreate text node
+var newDivText = document.createTextNode("Hello World");
+//add text to div 
+//newDiv.appendChild(newDivText);
+newDiv.appendChild(newDivText);
+
+var container = document.querySelector('header .container');
+var h1 = document.querySelector('header h1');
+
+console.log(newDiv);
+newDiv.style.fontSize = '30px';
+container.insertBefore(newDiv, h1);
+
+ 

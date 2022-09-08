@@ -1,45 +1,128 @@
-<html>
 
-<h2 >Appointment Booking App</h2>
+
+<html>
+  <h2>Appointment Booking App</h2>
+
+    <style>
+      form{
+        background-color: orange;
+        text-align:center;
+      }
+      input{
+        font-size: 30px;
+        color:green;
+        width: 550px;
+      }
+    </style>
 <body>
-  <form onsubmit='saveToLocalStorage(event)'>
-    <label>Name</label>
-    <input type="text" name="username" requeird></input>
-    <label>EmailId</label>
-    <input type="email" name="emailId" requeird></input>
-    <label>Phone Number</label>
-    <input type="tel" name="phoneNumber"></input>
-    <button>Submit</button>
+  <form onsubmit="saveToLocalStorage(event)">
+    <label> Name</label>
+    <br />
+    <input id="username" type="text" name="userName" required />
+    <br/>
+    <label> EmailId</label>
+    <br />
+    <input id="email" type="email" name="emailId" required />
+      <br />
+    <label> Phone Number</label>
+    <br />
+    <input id="phonenumber" type="tel" name="phoneNumber" />
+    <br />
+    <button> Sing Up </button>
+    <br />
+  </form>
+  <form>
+    <input>
   </form>
   <ul id='listOfUsers'></ul>
   <script>
-    // creating a function
     function saveToLocalStorage(event) {
       event.preventDefault();
       const name = event.target.username.value;
       const email = event.target.emailId.value;
-      const phoneNumber = event.target.phoneNumber.value;
-      //creating obj
+      const phonenumber = event.target.phonenumber.value;
+      // localStorage.setItem('name', name);
+      // localStorage.setItem('email', email);
+      // localStorage.setItem('phonenumber', phonenumber)
       const obj = {
-        name: name,
-        email: email,
-        phoneNumber : phoneNumber
+        name,
+        email,
+        phonenumber
       }
-      // calling obj by its email element
-      localStorage.setItem(obj.email,JSON.stringify(obj));
+      localStorage.setItem(obj.email, JSON.stringify(obj))
       showNewUserOnScreen(obj)
     }
 
-    function showNewUserOnScreen(user){
-      const parentNode = document.getElementById('listOfUsers');
-      const childHTML = `<li> ${user.name} - ${user.email} </li>`
+    window.addEventListener("DOMContentLoaded", () => {
+      const localStorageObj = localStorage;
+      const localstoragekeys = Object.keys(localStorageObj)
+
+      for (var i = 0; i < localstoragekeys.length; i++) {
+        const key = localstoragekeys[i]
+        const userDetailsString = localStorageObj[key];
+        const userDetailsObj = JSON.parse(userDetailsString);
+        showNewUserOnScreen(userDetailsObj)
+      }
+    })
+
+    function showNewUserOnScreen(user) {
+
+    // if(localStorage.getItem(user.email) !==null){
+    //      removeUserFromScreen(user.email)
+    //    }
+
+       document.getElementById('email').value = '';
+      document.getElementById('username').value = '';
+      document.getElementById('phonenumber').value = '';
       
-        parentNode.innerHTML = parentNode.innerHTML + childHTML;
+
+      const parentNode = document.getElementById('listOfUsers');
+      const childHTML = `<li id=${user.email}> ${user.name} - ${user.email}
+                                        <button onclick=deleteUser('${user.email}')> Delete User </button>
+                                        <button onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}')> Edit User </button>
+                                     </li>`
+
+      parentNode.innerHTML = parentNode.innerHTML + childHTML;
+    }
+
+    //Edit user
+    function editUserDetails(emailId){
+      document.getElementById('email').value = emailId;
+      document.getElementById('text').value = username;
+      document.getElementById('tel').value = phonenumber;
+
+     deleteUser(emailId);
+       
+     
+    }
+
+    // deleteUser('abc@gmail.com')
+
+    function deleteUser(emailId) {
+      console.log(emailId)
+      localStorage.removeItem(emailId);
+       
+      removeUserFromScreen(emailId);
+      
 
     }
 
+    function removeUserFromScreen(emailId) {
+      const parentNode = document.getElementById('listOfUsers');
+      const childNodeToBeDeleted = document.getElementById(emailId);
+
+      parentNode.removeChild(childNodeToBeDeleted)
+    }
+
+
+
+
+
+
 
   </script>
+
+
 </body>
 
 </html>

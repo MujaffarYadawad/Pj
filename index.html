@@ -18,7 +18,7 @@
   <form onsubmit="saveToLocalStorage(event)">
     <label> Name</label>
     <br />
-    <input id="username" type="text" name="userName" required />
+    <input id="username" type="text" name="username" required />
     <br/>
     <label> EmailId</label>
     <br />
@@ -26,7 +26,7 @@
       <br />
     <label> Phone Number</label>
     <br />
-    <input id="phonenumber" type="tel" name="phoneNumber" />
+    <input id="phonenumber" type="tel" name="phonenumber" />
     <br />
     <button> Sing Up </button>
     <br />
@@ -41,9 +41,8 @@
       const name = event.target.username.value;
       const email = event.target.emailId.value;
       const phonenumber = event.target.phonenumber.value;
-      // localStorage.setItem('name', name);
-      // localStorage.setItem('email', email);
-      // localStorage.setItem('phonenumber', phonenumber)
+    
+      
       const obj = {
         name,
         email,
@@ -86,12 +85,13 @@
     }
 
     //Edit user
-    function editUserDetails(emailId){
+    function editUserDetails(emailId,name,phonenumber){
       document.getElementById('email').value = emailId;
-      document.getElementById('text').value = username;
-      document.getElementById('tel').value = phonenumber;
+      document.getElementById('username').value = name;
+      document.getElementById('phonenumber').value = phonenumber;
 
      deleteUser(emailId);
+      
        
      
     }
@@ -102,7 +102,9 @@
       console.log(emailId)
       localStorage.removeItem(emailId);
        
+       
       removeUserFromScreen(emailId);
+       
       
 
     }

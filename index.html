@@ -31,9 +31,6 @@
     <button> Sing Up </button>
     <br />
   </form>
-  <form>
-    <input>
-  </form>
   <ul id='listOfUsers'></ul>
   <script>
     function saveToLocalStorage(event) {
@@ -65,10 +62,6 @@
     })
 
     function showNewUserOnScreen(user) {
-
-    // if(localStorage.getItem(user.email) !==null){
-    //      removeUserFromScreen(user.email)
-    //    }
 
        document.getElementById('email').value = '';
       document.getElementById('username').value = '';

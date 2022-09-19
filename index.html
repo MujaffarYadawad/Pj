@@ -1,11 +1,12 @@
 
 
 <html>
+  
   <h2>Appointment Booking App</h2>
 
     <style>
       form{
-        background-color: orange;
+        background-color:orange;
         text-align:center;
       }
       input{
@@ -78,12 +79,12 @@
     }
 
     //Edit user
-    function editUserDetails(emailId,name,phonenumber){
-      document.getElementById('email').value = emailId;
+    function editUserDetails(email,name,phonenumber){
+      document.getElementById('email').value = email;
       document.getElementById('username').value = name;
       document.getElementById('phonenumber').value = phonenumber;
 
-     deleteUser(emailId);
+     deleteUser(email);
       
        
      
@@ -109,14 +110,7 @@
       parentNode.removeChild(childNodeToBeDeleted)
     }
 
-
-
-
-
-
-
   </script>
-
 
 </body>
 

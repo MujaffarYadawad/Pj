@@ -1,6 +1,8 @@
 const posts = [
   {title : 'Post1',body:'this is post one', createdAt : new Date().getTime()},
   {title : 'Post2',body:'this is post two', createdAt : new Date().getTime()}
+  
+
 ];
 let intervalId = 0;
 
@@ -16,7 +18,7 @@ function getPosts(){
   }, 1000);
 }
 
-function createPost(post){
+ function createPost(post){
     return new Promise((resolve,reject)=>{
         setTimeout(()=>{
             posts.push({...post,createdAt:new Date().getTime()});
@@ -27,13 +29,15 @@ function createPost(post){
             }else{
                 reject()
             }
+            
 
-        },2000)
+        },1000)
     }
+    
     )}
+   
 
 function deletePosts(){
-  console.log('del');
   return new Promise((resolve, reject)=>{
     setTimeout(()=>{
       if(posts.length>0){
@@ -41,27 +45,46 @@ function deletePosts(){
       resolve();
     }
     else{
-      reject('Array is empty now');
+      reject('Error : Array is empty now');
 
     }
 
-    },1000);
+    },3000);
     
   })
-  
+
 }
-// deletePosts();
-//creat post
-
-createPost({ title: 'post Three', body: 'This is post three'})
- .then(()=>{
-  getPosts()
-  deletePosts().then(()=>{
-    getPosts();
-  })
- })
-
-
-   .catch(err => console.log(err));
+//   .then(()=>{
+//   getPosts()
+//   deletePosts().then(()=>{
+//     getPosts();
+//     deletePosts().then(()=>{
+//       getPosts();
+//       deletePosts().then(()=>{
+//         getPosts();
+//         deletePosts().then(()=>{
+           
+          
+//         }).catch(error => console.log(error));
+//       }).catch(err => console.log(err));
+//     }).catch(err => console.log(err));
+//   }) 
+//  })
+// .catch(err => console.log(err));
  
+ async function into(){
+  let msg = await createPost({ title: 'post Three', body: 'This is post three'});
+  getPosts();
+  
+  console.log('a');
+ }
+ 
+ async function delinto(){
+   try{
+  let del = await deletePosts();
 
+  console.log('aa');
+   }catch(err){ console.log(err)};
+ }
+ into();
+ delinto();

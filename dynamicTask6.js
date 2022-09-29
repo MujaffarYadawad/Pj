@@ -13,9 +13,12 @@ function getPosts(){
       let output = '';
        for(let i =0; i<posts.length; i++){
       output += `<li>${posts[i].title} - last updated ${(new Date().getTime()  - posts[i].createdAt) / 1000}seconds ago</li>`;
+    
     }
     document.body.innerHTML = output;
+  
   }, 1000);
+   
 }
 
  function createPost(post){
@@ -42,6 +45,7 @@ function deletePosts(){
     setTimeout(()=>{
       if(posts.length>0){
       const lastElement = posts.pop();
+       
       resolve();
     }
     else{
@@ -76,15 +80,16 @@ function deletePosts(){
   let msg = await createPost({ title: 'post Three', body: 'This is post three'});
   getPosts();
   
-  console.log('a');
+   //console.log(msg);
  }
  
  async function delinto(){
    try{
   let del = await deletePosts();
-
-  console.log('aa');
+   console.log(del);
    }catch(err){ console.log(err)};
  }
  into();
  delinto();
+
+ // try to  delinnto(); again it will del one more post  

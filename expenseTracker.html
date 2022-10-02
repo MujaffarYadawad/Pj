@@ -1,0 +1,154 @@
+<html>
+
+<h2>Expense Tracker</h2>
+<style>
+  form {
+    background-color: burlywood;
+    text-align: center;
+  }
+
+  input {
+    font-size: 30px;
+    color: green;
+    width: 550px;
+  }
+</style>
+
+<body>
+  <form onsubmit="saveToLocalStorage(event)">
+    <label>Choose Expense Amount</label>
+    <br />
+    <input id="chooseExpenseAmount" , type="text" , name="chooseExpenseAmount" required />
+    <br />
+    <label>Choose Discription</label>
+    <br />
+    <input id="chooseDiscription" , type="text" , name="chooseDiscription" required />
+    <br />
+    <label>Choose Category</label>
+    <br />
+    <input id="chooseCategory" , type="text" , name="chooseCategory" required />
+    <br />
+    <button>Add Item</button>
+    <br />
+
+  </form>
+  <ul id='listOfItems'></ul>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+  <script>
+      function saveToLocalStorage(event) {
+        event.preventDefault();
+      
+        const chooseExpenseAmount=event.target.chooseExpenseAmount.value;
+        const chooseDiscription=event.target.chooseDiscription.value;
+        const chooseCategory=event.target.chooseCategory.value;   
+
+        const obj={
+          chooseExpenseAmount,
+          chooseDiscription,
+          chooseCategory,
+        }
+        axios.post("https://crudcrud.com/api/e889751619464f0690fd002b8c6fbe9e/AppointemntData",obj)
+        .then((res)=>{
+           showNewItemsOnScreen(res.data)
+          console.log(res)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+        // localStorage.setItem(obj.chooseCategory, JSON.stringify(obj))
+        // showNewItemsOnScreen(obj)
+      
+      }
+      //saveToLocalStorage();
+
+      window.addEventListener("DOMContentLoaded", () => {
+        axios.get("https://crudcrud.com/api/e889751619464f0690fd002b8c6fbe9e/AppointemntData")
+        .then((res)=>{
+          for(let i=0;i<res.data.length;i++){
+            showNewItemsOnScreen(res.data[i])
+          }
+          console.log(res)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+          // const localStorageObj = localStorage;
+          // const localstoragekeys = Object.keys(localStorageObj)
+
+          // for (var i = 0; i < localstoragekeys.length; i++) {
+          //   const key = localstoragekeys[i];
+          //   const itemDetailsString = localStorageObj[key];
+          //   const itemDetailsObj =  (itemDetailsString);
+          //   showNewItemsOnScreen(itemDetailsObj)
+         //
+        })
+
+      function showNewItemsOnScreen(item) {
+        
+
+          document.getElementById('chooseExpenseAmount').value = '';
+          document.getElementById('chooseDiscription').value = '';
+          document.getElementById('chooseCategory').value = '';
+
+          
+
+
+          const parentNode = document.getElementById('listOfItems');
+          const childHTML = `<li id=${item._id}> ${item.chooseExpenseAmount} - ${item.chooseDiscription} - ${item.chooseCategory}
+                                        <button onclick=deleteItem('${item._id}')> Delete Item </button>
+                                            <button onclick=editItemDetails('${item.chooseExpenseAmount}','${item.chooseDiscription}','${item.chooseCategory}','${item._id}')> Edit Item </button>
+                                     </li>`
+
+          parentNode.innerHTML = parentNode.innerHTML + childHTML;
+          console.log("y");
+         
+
+        }
+        // edit items
+        function editItemDetails(chooseExpenseAmount, chooseDiscription, chooseCategory, itemId) {
+           
+          
+           document.getElementById('chooseExpenseAmount').value = chooseExpenseAmount;
+           document.getElementById('chooseDiscription').value = chooseDiscription;
+           document.getElementById('chooseCategory').value = chooseCategory;
+           
+            
+          deleteItem(itemId);
+
+        }
+
+        //delete Items
+        function deleteItem(itemId){
+          axios.delete(`https://crudcrud.com/api/e889751619464f0690fd002b8c6fbe9e/AppointemntData/${itemId}`)
+          .then((res)=>{
+            removeItemsFromScreen(itemId)
+            console.log(res)
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+          // console.log(chooseCategory);
+
+          // localStorage.removeItem(chooseCategory);
+          
+          // removeItemsFromScreen(chooseCategory);
+           
+
+        }
+        //remove from screen
+
+       function removeItemsFromScreen(itemId) {
+          const parentNode = document.getElementById('listOfItems');
+          const childNodeToBeDeleted = document.getElementById(itemId);
+
+          parentNode.removeChild(childNodeToBeDeleted)
+        }
+
+
+
+     
+  </script>
+
+</body>
+
+</html>
